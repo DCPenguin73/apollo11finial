@@ -90,6 +90,10 @@ void callBack(const Interface *pUI, void * p)
 
    }
 }
+void GameOver(bool onPlatform, double Speed) {
+    //THIS IS A STUB FUNCTION SO COOL MUCH WOW
+}
+
 
 /*********************************
  * Main is pretty sparse.  Just initialize
