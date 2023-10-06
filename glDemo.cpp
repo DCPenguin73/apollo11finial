@@ -52,10 +52,14 @@ void callBack(const Interface *pUI, void * p)
    Demo * pDemo = (Demo *)p;  
 
    // move the ship around
-   if (pUI->isRight())
-      pDemo->angle -= 0.1;
-   if (pUI->isLeft())
-      pDemo->angle += 0.1;
+   if (pUI->isRight()) {
+       pDemo->angle -= 0.1;
+       pDemo->ptLM.addX(1.0);
+   }
+      if (pUI->isLeft()) {
+          pDemo->angle += 0.1;
+          pDemo->ptLM.addX(-1.0);
+   }  
    if (pUI->isUp())
       pDemo->ptLM.addY(-1.0);
    if (pUI->isDown())
