@@ -52,10 +52,14 @@ void callBack(const Interface *pUI, void * p)
    Demo * pDemo = (Demo *)p;  
 
    // move the ship around
-   if (pUI->isRight())
-      pDemo->angle -= 0.1;
-   if (pUI->isLeft())
-      pDemo->angle += 0.1;
+   if (pUI->isRight()) {
+       pDemo->angle -= 0.1;
+       pDemo->ptLM.addX(1.0);
+   }
+      if (pUI->isLeft()) {
+          pDemo->angle += 0.1;
+          pDemo->ptLM.addX(-1.0);
+   }  
    if (pUI->isUp())
       pDemo->ptLM.addY(-1.0);
    if (pUI->isDown())
@@ -74,7 +78,17 @@ void callBack(const Interface *pUI, void * p)
    gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
    // draw our little star
-   gout.drawStar(pDemo->ptStar, pDemo->phase++);
+   for (int x = 0; x < 50; x++) {
+       pDemo->ptStar.setX(random(0.0, /*pDemo->ptUpperRight.getX()*/400.0));
+       pDemo->ptStar.setY(random(0.0, /*pDemo->ptUpperRight.getY()*/400.0));
+       if (pDemo->ground.getElevation(pDemo->ptStar) > 0.0) {
+           gout.drawStar(pDemo->ptStar, pDemo->phase);
+       }
+       else {
+           x--;
+       }
+
+   }
 }
 
 /*********************************
