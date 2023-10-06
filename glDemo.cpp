@@ -52,10 +52,14 @@ void callBack(const Interface *pUI, void * p)
    Demo * pDemo = (Demo *)p;  
 
    // move the ship around
-   if (pUI->isRight())
-      pDemo->angle -= 0.1;
-   if (pUI->isLeft())
-      pDemo->angle += 0.1;
+   if (pUI->isRight()) {
+       pDemo->angle -= 0.1;
+       pDemo->ptLM.addX(1.0);
+   }
+   if (pUI->isLeft()) {
+       pDemo->angle += 0.1;
+       pDemo->ptLM.addX(-1.0);
+   }
    if (pUI->isUp())
       pDemo->ptLM.addY(-1.0);
    if (pUI->isDown())
@@ -70,7 +74,7 @@ void callBack(const Interface *pUI, void * p)
                     pUI->isDown(), pUI->isLeft(), pUI->isRight());
 
    // put some text on the screen
-   gout.setPosition(Point(30.0, 30.0));
+   gout.setPosition(Point(30.0, 370.0));
    gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
    // draw our little star

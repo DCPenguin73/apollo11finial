@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/x64/Debug/Lab03.tlog
+/packages/nupengl.core.redist.0.1.0.1
+/packages/nupengl.core.0.1.0.1/build/native
+/packages/nupengl.core.0.1.0.1/build
+/.vs/Lab03
+/.vs/apollo11finial/v17
+/.vs
+/packages/nupengl.core.0.1.0.1
+/x64/Debug/freeglut.dll
+/x64/Debug
