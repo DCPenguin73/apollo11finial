@@ -78,8 +78,22 @@ void callBack(const Interface *pUI, void * p)
    gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
    // draw our little star
-   gout.drawStar(pDemo->ptStar, pDemo->phase++);
+   for (int x = 0; x < 50; x++) {
+       pDemo->ptStar.setX(random(0.0, /*pDemo->ptUpperRight.getX()*/400.0));
+       pDemo->ptStar.setY(random(0.0, /*pDemo->ptUpperRight.getY()*/400.0));
+       if (pDemo->ground.getElevation(pDemo->ptStar) > 0.0) {
+           gout.drawStar(pDemo->ptStar, pDemo->phase);
+       }
+       else {
+           x--;
+       }
+
+   }
 }
+void GameOver(bool onPlatform, double Speed) {
+    //THIS IS A STUB FUNCTION SO COOL MUCH WOW
+}
+
 
 /*********************************
  * Main is pretty sparse.  Just initialize
