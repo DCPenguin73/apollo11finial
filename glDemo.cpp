@@ -34,6 +34,8 @@ public:
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
    Point ptStar;
+   int fuel = 5000;
+   double speed = 12.91;
 };
 
 /*************************************
@@ -74,8 +76,19 @@ void callBack(const Interface *pUI, void * p)
                     pUI->isDown(), pUI->isLeft(), pUI->isRight());
 
    // put some text on the screen
-   gout.setPosition(Point(30.0, 370.0));
-   gout << "Demo (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
+   gout.setf(ios::fixed);
+   gout.setf(ios::showpoint);
+   gout.precision(2);
+
+   gout.setPosition(Point(30.0, 385.0));
+   gout << "Fuel " << (int)pDemo->fuel << " lbs" << "\n"; // change once lander set up
+
+   gout.setPosition(Point(30.0, 372.0));
+   gout << "Altitude " << (double)pDemo->ground.getElevation(pDemo->ptLM) << " meters" << "\n";
+
+   gout.setPosition(Point(30.0, 359.0));
+   gout << "Speed " << (double)pDemo->speed << " m/s" << "\n";// change once lander set up
+
 
    // draw our little star
    for (int x = 0; x < 50; x++) {
