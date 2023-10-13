@@ -320,7 +320,7 @@ void ogstream::drawLander(const Point& point, double angle)
  * Draw the flames coming out of a moonlander for thrust
  ***********************************************************************/
 void ogstream::drawLanderFlames(const Point& point, double angle,
-   bool bottom,
+   bool up,
    bool clockwise,
    bool counterClockwise)
 {
@@ -329,7 +329,7 @@ void ogstream::drawLanderFlames(const Point& point, double angle,
       *this = point;
 
    // bottom thrust
-   if (bottom)
+   if (up)
    {
       glBegin(GL_TRIANGLES);
       glColor3f(1.0 /* red % */, 0.0 /* green % */, 0.0 /* blue % */);
@@ -371,7 +371,7 @@ void ogstream::drawLanderFlames(const Point& point, double angle,
    }
 
    // reset the color back to white when done
-   if (bottom || clockwise || counterClockwise)
+   if (up || clockwise || counterClockwise)
       glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
 }
 

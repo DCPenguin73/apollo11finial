@@ -1,9 +1,25 @@
+/*************************************************************
+ * 1. Name:
+ *      Cayden Lords and Daniel Farr
+ * 2. Assignment Name:
+ *      Lab 04: Apollo 11 Visuals
+ * 3. Assignment Description:
+ *      Simulate the Apollo 11 landing
+ * 4. What was the hardest part? Be as specific as possible.
+ *      The hardest part was honestly getting our Github to sync up. Sometimes you get confused
+ *      by branches, commit merges, and whatnot, and you have to untangle the threads. The actual
+ *      code was pretty simple. 
+ * 5. How long did it take for you to complete the assignment?
+ *      1 hour? 2? 
+ *****************************************************************/
+
+
 /**********************************************************************
  * GL Demo
  * Just a simple program to demonstrate how to create an Open GL window, 
  * draw something on the window, and accept simple user input
  **********************************************************************/
-
+#include "lander.h"
 #include "point.h"
 #include "uiInteract.h"
 #include "uiDraw.h"
@@ -18,9 +34,7 @@ class Demo
 {
 public:
    Demo(const Point& ptUpperRight) :
-          angle(0.0),
           ptStar(ptUpperRight.getX() - 20.0, ptUpperRight.getY() - 20.0),
-          ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight)
    { 
 
@@ -28,14 +42,13 @@ public:
    }
 
    // this is just for test purposes.  Don't make member variables public!
-   Point ptLM;           // location of the LM on the screen
    Point ptUpperRight;   // size of the screen
-   double angle;         // angle the LM is pointing
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
    Point ptStar;
    int fuel = 5000;
    double speed = 12.91;
+   Lander apollo11 = Lander();
 };
 
 /*************************************
@@ -54,37 +67,28 @@ void callBack(const Interface *pUI, void * p)
    Demo * pDemo = (Demo *)p;  
 
    // move the ship around
-   if (pUI->isRight()) {
-       pDemo->angle -= 0.1;
-       pDemo->ptLM.addX(1.0);
-   }
-   if (pUI->isLeft()) {
-       pDemo->angle += 0.1;
-       pDemo->ptLM.addX(-1.0);
-   }
-   if (pUI->isUp())
-      pDemo->ptLM.addY(-1.0);
-   if (pUI->isDown())
-      pDemo->ptLM.addY(1.0);
+   pDemo->apollo11.moveLander(pUI);
 
    // draw the ground
    pDemo->ground.draw(gout);
 
    // draw the lander and its flames
-   gout.drawLander(pDemo->ptLM /*position*/, pDemo->angle /*angle*/);
-   gout.drawLanderFlames(pDemo->ptLM, pDemo->angle, /*angle*/
-                    pUI->isDown(), pUI->isLeft(), pUI->isRight());
+   gout.drawLander(pDemo->apollo11.getLocation() /*position*/, pDemo->apollo11.getAngle().getRadians() /*angle*/);
+   if (pDemo->apollo11.outOfFuel == false) {
+       gout.drawLanderFlames(pDemo->apollo11.getLocation(), pDemo->apollo11.getAngle().getRadians(), /*angle*/
+           pUI->isUp(), pUI->isLeft(), pUI->isRight());
 
+   }
    // put some text on the screen
    gout.setf(ios::fixed);
    gout.setf(ios::showpoint);
    gout.precision(2);
 
    gout.setPosition(Point(30.0, 385.0));
-   gout << "Fuel " << (int)pDemo->fuel << " lbs" << "\n"; // change once lander set up
+   gout << "Fuel " << (int)pDemo->apollo11.getFuel() << " lbs" << "\n"; // change once lander set up
 
    gout.setPosition(Point(30.0, 372.0));
-   gout << "Altitude " << (double)pDemo->ground.getElevation(pDemo->ptLM) << " meters" << "\n";
+   gout << "Altitude " << (double)pDemo->ground.getElevation(pDemo->apollo11.getLocation()) << " meters" << "\n";
 
    gout.setPosition(Point(30.0, 359.0));
    gout << "Speed " << (double)pDemo->speed << " m/s" << "\n";// change once lander set up

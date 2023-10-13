@@ -5,13 +5,14 @@
 #include <sstream>    // for OSTRINGSTRING
 #include "point.h"    // Where things are drawn
 #include "angle.h"
+#include "uiInteract.h"
 using std::string;
 using std::min;
 using std::max; using namespace std;
 class Lander {
 public:
 	Lander() {
-		location = Point(0, 0);
+		location = Point(200, 200);
 		xAcc = 0;
 		yAcc = 0;
 		xVel = 0;
@@ -19,6 +20,7 @@ public:
 		landerAngle = Angle(0);
 		speed = 0;
 		fuel = 5000;
+		time = .1;
 	}
 	Lander(const Lander& copier) {
 		location = copier.location;
@@ -29,7 +31,8 @@ public:
 		landerAngle = copier.landerAngle;
 		speed = copier.speed;
 		fuel = copier.fuel;
-		bool outOfFuel = copier.outOfFuel;
+		outOfFuel = copier.outOfFuel;
+		time = copier.time;
 	}
 	Lander(Point inLocation, double inXAcc, double inYAcc, double inXVel, double inYVel, Angle inLanderAngle, double inSpeed) {
 		location = inLocation;
@@ -41,7 +44,10 @@ public:
 		speed = inSpeed;
 		fuel = 5000;
 		outOfFuel = false;
+		time = .1;
 	}
+public: 
+	bool outOfFuel;
 private:
 	Point location;
 	double xAcc;
@@ -51,18 +57,21 @@ private:
 	Angle landerAngle;
 	double speed;
 	int fuel;
-	const double GRAVITY = 10;
-	double THRUSTSTRENGTH = 10;
-	bool outOfFuel;
+	const double GRAVITY = -1.625;
+	const double THRUSTSTRENGTH = 10;
+	double thrusterOn = false;
+	double time;
 private:
-	double computeDistance(double speed, double velocity, double accel, double time) const;
-	double calculateAcc(double force, double mass) const;
+	double computeDistance(double location, double velocity, double accel, double time) const;
 	double calculateVel(double velocity, double acceleration, double time) const;
 	double calculateHor(Angle angle, double total) const;
 	double calculateVer(Angle angle, double total) const;
 	double calculateTotal(double x, double y) const;
 public:
-	void moveLander();
-	void setFuel(int change);
+	void moveLander(const Interface *UI);
 	int getFuel() const;
+	Point getLocation() const;
+	Angle getAngle() const;
+	void loseFuel(int change);
+
 };

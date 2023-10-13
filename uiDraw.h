@@ -49,7 +49,7 @@ public:
 
    virtual void drawLanderFlames(const Point& pt = Point(),
                                  double angle = 0.0,
-                                 bool bottom = false,
+                                 bool up = false,
                                  bool left = false,
                                  bool right = false);
 
