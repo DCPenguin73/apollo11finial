@@ -6,6 +6,7 @@
 #include "point.h"   
 #include "angle.h"
 #include "uiInteract.h"
+#define PI 3.14159265359
 using std::string;
 using std::min;
 using std::max;
@@ -36,11 +37,11 @@ double Lander::calculateTotal(double x, double y) const {
 void Lander::moveLander(const Interface *UI) {
 	if (outOfFuel == false) {
 		if (UI->isRight()) {
-			landerAngle.setRadians(landerAngle.getRadians() + .1);
+			landerAngle.setRadians(landerAngle.getRadians() - .1);
 			loseFuel(1);
 		}
 		if (UI->isLeft()) {
-			landerAngle.setRadians(landerAngle.getRadians() - .1);
+			landerAngle.setRadians(landerAngle.getRadians() + .1);
 			loseFuel(1);
 		}
 		if (UI->isUp()) {
@@ -52,7 +53,7 @@ void Lander::moveLander(const Interface *UI) {
 		}
 	}
 	if (thrusterOn == true) {
-		xAcc = calculateHor(landerAngle.getRadians(), THRUSTSTRENGTH);
+		xAcc = calculateHor(landerAngle.getRadians()+PI, THRUSTSTRENGTH);
 		yAcc = calculateVer(landerAngle.getRadians(), THRUSTSTRENGTH) + GRAVITY;
 	}
 	else {

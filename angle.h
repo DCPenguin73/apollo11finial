@@ -24,20 +24,16 @@ public:
 	{
 		radians = copier.radians;
 	}
-	Angle(double inputDeg)
+	Angle(double inputRad)
 	{
-		radians = convertToRadians(inputDeg);
+		radians = inputRad;
 	}
 public:
-	double getDegrees() const;
 	double getRadians() const;
-	void setDegrees(double angleD);
 	void setRadians(double angleR);
-	void display(ostream& out) const;
+
 private:
 	double normalize(double angleR) const;
-	double convertToDegrees(double angleR) const;
-	double convertToRadians(double angleD) const;
 };
 
 

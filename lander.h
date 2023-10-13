@@ -6,6 +6,7 @@
 #include "point.h"    // Where things are drawn
 #include "angle.h"
 #include "uiInteract.h"
+#define PI 3.14159265359
 using std::string;
 using std::min;
 using std::max; using namespace std;
@@ -17,7 +18,7 @@ public:
 		yAcc = 0;
 		xVel = 0;
 		yVel = 0;
-		landerAngle = Angle(0);
+		landerAngle = 0;
 		speed = 0;
 		fuel = 5000;
 		time = .1;
@@ -58,7 +59,7 @@ private:
 	double speed;
 	int fuel;
 	const double GRAVITY = -1.625;
-	const double THRUSTSTRENGTH = 10;
+	const double THRUSTSTRENGTH = 45000/15103;
 	double thrusterOn = false;
 	double time;
 private:
