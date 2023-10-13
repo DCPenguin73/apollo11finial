@@ -1,18 +1,15 @@
 /*************************************************************
  * 1. Name:
- *      Cayden Lords and Daniel Farr
+ *      team 7 Daniel Carr & Cayden Lords
  * 2. Assignment Name:
  *      Lab 04: Apollo 11 Visuals
  * 3. Assignment Description:
  *      Simulate the Apollo 11 landing
  * 4. What was the hardest part? Be as specific as possible.
- *      The hardest part was honestly getting our Github to sync up. Sometimes you get confused
- *      by branches, commit merges, and whatnot, and you have to untangle the threads. The actual
- *      code was pretty simple. 
+ *      The hardest part was getting Github to sync up. The actual code was pretty simple.
  * 5. How long did it take for you to complete the assignment?
- *      1 hour? 2? 
+ *      2 hours
  *****************************************************************/
-
 
 /**********************************************************************
  * GL Demo
