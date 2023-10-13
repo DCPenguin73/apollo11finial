@@ -33,7 +33,7 @@ public:
    Demo(const Point& ptUpperRight) :
           angle(0.0),
           ptStar(ptUpperRight.getX() - 20.0, ptUpperRight.getY() - 20.0),
-          ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
+          ptLM(ptUpperRight.getX() -30.0, ptUpperRight.getY() -30.0),
           ground(ptUpperRight)
    { 
 
@@ -50,6 +50,23 @@ public:
    int fuel = 5000;
    double speed = 12.91;
 };
+
+void GameOver(bool onPlatform, double Speed) {
+    ogstream gout;
+    if (onPlatform == true && Speed <= 4.0) {
+        gout.setPosition(Point(175.0, 225.0));
+        gout << "The Eagle has landed." << "\n";
+        
+    }
+    else if (onPlatform == true && Speed > 4.0) {
+        gout.setPosition(Point(170.0, 225.0));
+        gout << "Houston, we have a problem!" << "\n";
+    }
+    else {
+        gout.setPosition(Point(180.0, 225.0));
+        gout << "Crash." << "\n";
+    }
+}
 
 /*************************************
  * All the interesting work happens here, when
@@ -68,11 +85,11 @@ void callBack(const Interface *pUI, void * p)
 
    // move the ship around
    if (pUI->isRight()) {
-       pDemo->angle -= 0.1;
+       //pDemo->angle -= 0.1;
        pDemo->ptLM.addX(1.0);
    }
    if (pUI->isLeft()) {
-       pDemo->angle += 0.1;
+       //pDemo->angle += 0.1;
        pDemo->ptLM.addX(-1.0);
    }
    if (pUI->isUp())
@@ -82,6 +99,12 @@ void callBack(const Interface *pUI, void * p)
 
    // draw the ground
    pDemo->ground.draw(gout);
+
+   // call gameover
+   if (pDemo->ground.getElevation(pDemo->ptLM) < 0.0) {
+       GameOver(pDemo->ground.onPlatform(pDemo->ptLM, 2), 3.9);
+   }
+
 
    // draw the lander and its flames
    gout.drawLander(pDemo->ptLM /*position*/, pDemo->angle /*angle*/);
@@ -116,9 +139,7 @@ void callBack(const Interface *pUI, void * p)
 
    }
 }
-void GameOver(bool onPlatform, double Speed) {
-    //THIS IS A STUB FUNCTION SO COOL MUCH WOW
-}
+
 
 
 /*********************************

@@ -107,7 +107,7 @@ bool Ground :: onPlatform(const Point & position, int landerWidth) const
       return false;
 
    // not on the platform if we hit the ground
-   if (getElevation(position) < 0.0)
+   if (getElevation(position) < -1.0)
       return false;
 
    // not on the platform if we are too far left
