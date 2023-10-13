@@ -59,7 +59,7 @@ private:
 	double speed;
 	int fuel;
 	const double GRAVITY = -1.625;
-	const double THRUSTSTRENGTH = 45000/15103;
+	const double THRUSTSTRENGTH = 45000/15103 *3;
 	double thrusterOn = false;
 	double time;
 private:
