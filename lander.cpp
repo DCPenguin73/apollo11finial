@@ -84,3 +84,6 @@ void Lander::loseFuel(int change){
 		outOfFuel = true;
 	}
 }
+double Lander::getSpeed() const {
+	return speed;
+}

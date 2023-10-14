@@ -44,7 +44,7 @@ public:
    Ground ground;
    Point ptStar;
    int fuel = 5000;
-   double speed = 12.91;
+   //double speed = 12.91;
    Lander apollo11 = Lander();
 };
 
@@ -88,7 +88,7 @@ void callBack(const Interface *pUI, void * p)
    gout << "Altitude " << (double)pDemo->ground.getElevation(pDemo->apollo11.getLocation()) << " meters" << "\n";
 
    gout.setPosition(Point(30.0, 359.0));
-   gout << "Speed " << (double)pDemo->speed << " m/s" << "\n";// change once lander set up
+   gout << "Speed " << (double)pDemo->apollo11.getSpeed() << " m/s" << "\n";// change once lander set up
 
 
    // draw our little star

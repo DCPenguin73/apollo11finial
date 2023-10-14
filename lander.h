@@ -74,5 +74,6 @@ public:
 	Point getLocation() const;
 	Angle getAngle() const;
 	void loseFuel(int change);
+	double getSpeed() const;
 
 };
