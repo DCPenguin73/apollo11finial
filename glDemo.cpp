@@ -76,6 +76,12 @@ void callBack(const Interface *pUI, void * p)
            pUI->isUp(), pUI->isLeft(), pUI->isRight());
 
    }
+
+   // call gameover
+   if (pDemo->ground.getElevation(pDemo->apollo11.getLocation()) < 0.0) {
+       GameOver(pDemo->ground.onPlatform(pDemo->apollo11.getLocation(), 20), pDemo->apollo11.getSpeed());
+   }
+
    // put some text on the screen
    gout.setf(ios::fixed);
    gout.setf(ios::showpoint);
@@ -104,9 +110,7 @@ void callBack(const Interface *pUI, void * p)
 
    }
 }
-void GameOver(bool onPlatform, double Speed) {
-    //THIS IS A STUB FUNCTION SO COOL MUCH WOW
-}
+
 
 
 /*********************************
