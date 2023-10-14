@@ -46,7 +46,26 @@ public:
    int fuel = 5000;
    //double speed = 12.91;
    Lander apollo11 = Lander();
+   bool end = false;
 };
+
+void GameOver(bool onPlatform, double Speed) {
+    ogstream gout;
+    if (onPlatform == true && Speed <= 4.0) {
+        gout.setPosition(Point(175.0, 225.0));
+        gout << "The Eagle has landed." << "\n";
+
+
+    }
+    else if (onPlatform == true && Speed > 4.0) {
+        gout.setPosition(Point(170.0, 225.0));
+        gout << "Houston, we have a problem!" << "\n";
+    }
+    else {
+        gout.setPosition(Point(180.0, 225.0));
+        gout << "Crash." << "\n";
+    }
+}
 
 /*************************************
  * All the interesting work happens here, when
@@ -64,7 +83,9 @@ void callBack(const Interface *pUI, void * p)
    Demo * pDemo = (Demo *)p;  
 
    // move the ship around
-   pDemo->apollo11.moveLander(pUI);
+   if (pDemo->end == false) {
+       pDemo->apollo11.moveLander(pUI);
+   }
 
    // draw the ground
    pDemo->ground.draw(gout);
@@ -79,7 +100,9 @@ void callBack(const Interface *pUI, void * p)
 
    // call gameover
    if (pDemo->ground.getElevation(pDemo->apollo11.getLocation()) < 0.0) {
-       GameOver(pDemo->ground.onPlatform(pDemo->apollo11.getLocation(), 20), pDemo->apollo11.getSpeed());
+       GameOver(pDemo->ground.onPlatform(pDemo->apollo11.getLocation(), 2), pDemo->apollo11.getSpeed());
+       pDemo->end = true;
+       
    }
 
    // put some text on the screen

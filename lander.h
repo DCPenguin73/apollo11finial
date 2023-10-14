@@ -13,7 +13,7 @@ using std::max; using namespace std;
 class Lander {
 public:
 	Lander() {
-		location = Point(200, 200);
+		location = Point(300, 300);
 		xAcc = 0;
 		yAcc = 0;
 		xVel = 0;
