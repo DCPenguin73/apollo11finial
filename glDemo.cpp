@@ -85,6 +85,10 @@ void callBack(const Interface *pUI, void * p)
    // move the ship around
    if (pDemo->end == false) {
        pDemo->apollo11.moveLander(pUI);
+       if (pDemo->apollo11.outOfFuel == false) {
+           gout.drawLanderFlames(pDemo->apollo11.getLocation(), pDemo->apollo11.getAngle().getRadians(), /*angle*/
+               pUI->isUp(), pUI->isLeft(), pUI->isRight());
+       }
    }
 
    // draw the ground
@@ -92,11 +96,7 @@ void callBack(const Interface *pUI, void * p)
 
    // draw the lander and its flames
    gout.drawLander(pDemo->apollo11.getLocation() /*position*/, pDemo->apollo11.getAngle().getRadians() /*angle*/);
-   if (pDemo->apollo11.outOfFuel == false) {
-       gout.drawLanderFlames(pDemo->apollo11.getLocation(), pDemo->apollo11.getAngle().getRadians(), /*angle*/
-           pUI->isUp(), pUI->isLeft(), pUI->isRight());
-
-   }
+   
 
    // call gameover
    if (pDemo->ground.getElevation(pDemo->apollo11.getLocation()) < 0.0) {
