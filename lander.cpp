@@ -34,17 +34,17 @@ double Lander::calculateTotal(double x, double y) const {
 	total = sqrt(x * x + y * y);
 	return total;
 };
-void Lander::moveLander(const Interface *UI) {
+void Lander::moveLander(bool upPressed, bool leftPressed, bool rightPressed) {
 	if (outOfFuel == false) {
-		if (UI->isRight()) {
+		if (rightPressed) {
 			landerAngle.setRadians(landerAngle.getRadians() - .1);
 			loseFuel(1);
 		}
-		if (UI->isLeft()) {
+		if (leftPressed) {
 			landerAngle.setRadians(landerAngle.getRadians() + .1);
 			loseFuel(1);
 		}
-		if (UI->isUp()) {
+		if (upPressed) {
 			loseFuel(10);
 			thrusterOn = true;
 		}

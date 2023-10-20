@@ -69,7 +69,7 @@ private:
 	double calculateVer(Angle angle, double total) const;
 	double calculateTotal(double x, double y) const;
 public:
-	void moveLander(const Interface *UI);
+	void moveLander(bool upPressed, bool leftPressed, bool rightPressed);
 	int getFuel() const;
 	Point getLocation() const;
 	Angle getAngle() const;
